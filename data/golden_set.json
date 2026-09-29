@@ -1,0 +1,1133 @@
+{
+  "version": "gs-v1",
+  "kb_version": "kb-v1",
+  "brand": "Harbourline Assurance",
+  "entries": [
+    {
+      "id": "FAQ-001",
+      "category": "General - Cancellation",
+      "test_type": "single_fact",
+      "canonical_question": "What is the free-look period for a new life insurance policy?",
+      "question_variants": [
+        "How many days do I have to cancel a new life policy for a full refund?",
+        "Is there a cooling-off period on life insurance?"
+      ],
+      "reference_answer": "New Life policies have a 14-day free-look period from the date the policy document is received. Cancelling within it refunds the full premium, minus any medical examination costs incurred.",
+      "source_article_ids": [
+        "KB-GEN-001"
+      ],
+      "source_chunk_ids": [
+        "KB-GEN-001-01"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-002",
+      "category": "Payments",
+      "test_type": "single_fact",
+      "canonical_question": "Which cards can I use to pay my premium?",
+      "question_variants": [
+        "Do you take Amex?",
+        "Can I pay with my credit card?"
+      ],
+      "reference_answer": "Visa and Mastercard credit and debit cards are accepted. American Express is not accepted.",
+      "source_article_ids": [
+        "KB-PAY-001"
+      ],
+      "source_chunk_ids": [
+        "KB-PAY-001-01"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": "Variants probe the Amex exclusion."
+    },
+    {
+      "id": "FAQ-003",
+      "category": "Payments",
+      "test_type": "single_fact",
+      "canonical_question": "How long is the grace period for life insurance premiums?",
+      "question_variants": [
+        "If I pay my life premium late am I still covered?",
+        "How many days do I have after the life premium due date?"
+      ],
+      "reference_answer": "Life policies have a 30-day grace period after each premium due date, and cover continues during the grace period.",
+      "source_article_ids": [
+        "KB-PAY-002"
+      ],
+      "source_chunk_ids": [
+        "KB-PAY-002-01"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-004",
+      "category": "Travel",
+      "test_type": "single_fact",
+      "canonical_question": "What is the maximum trip length for single-trip travel insurance?",
+      "question_variants": [
+        "Can I buy single trip cover for a 5 month trip?",
+        "How long can a single trip be?"
+      ],
+      "reference_answer": "The maximum duration for a single trip is 180 days.",
+      "source_article_ids": [
+        "KB-TRV-001"
+      ],
+      "source_chunk_ids": [
+        "KB-TRV-001-01"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-005",
+      "category": "Travel - Claims",
+      "test_type": "single_fact",
+      "canonical_question": "What number do I call for a medical emergency overseas?",
+      "question_variants": [
+        "I'm overseas and need to go to hospital, who do I call?",
+        "What's the travel emergency hotline?"
+      ],
+      "reference_answer": "Call the 24/7 Travel Assistance line on +65 6000 1234, before hospital admission where possible.",
+      "source_article_ids": [
+        "KB-CON-001",
+        "KB-TRV-004"
+      ],
+      "source_chunk_ids": [
+        "KB-TRV-004-03",
+        "KB-CON-001-02"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-006",
+      "category": "Service",
+      "test_type": "single_fact",
+      "canonical_question": "What are your customer hotline opening hours?",
+      "question_variants": [
+        "When can I call you?",
+        "Is your hotline open on Sunday?"
+      ],
+      "reference_answer": "The customer hotline (+65 6000 1000) is open Monday to Friday 9am to 6pm and Saturday 9am to 1pm. It is closed on Sundays and public holidays.",
+      "source_article_ids": [
+        "KB-CON-001"
+      ],
+      "source_chunk_ids": [
+        "KB-CON-001-01"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-007",
+      "category": "Motor",
+      "test_type": "single_fact",
+      "canonical_question": "How many named drivers can I add to my motor policy?",
+      "question_variants": [
+        "Can I add my wife and two sons as drivers?",
+        "Is there a limit on named drivers?"
+      ],
+      "reference_answer": "Up to 5 named drivers can be added through the MyHarbourline app. Named drivers are free, except young or inexperienced drivers, who attract a premium loading.",
+      "source_article_ids": [
+        "KB-MTR-004"
+      ],
+      "source_chunk_ids": [
+        "KB-MTR-004-01"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-008",
+      "category": "Health",
+      "test_type": "single_fact",
+      "canonical_question": "What is the waiting period for illnesses on Hospital Care?",
+      "question_variants": [
+        "When does my hospital plan start covering illness?",
+        "Am I covered straight away if I get sick?"
+      ],
+      "reference_answer": "There is a 30-day waiting period for illnesses from the policy start date. Accidents are covered from the first day.",
+      "source_article_ids": [
+        "KB-HLT-003"
+      ],
+      "source_chunk_ids": [
+        "KB-HLT-003-01"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-009",
+      "category": "Life",
+      "test_type": "single_fact",
+      "canonical_question": "What is the entry age for Term Life Protect?",
+      "question_variants": [
+        "I'm 62, can I buy term life?",
+        "What age can I apply for term life?"
+      ],
+      "reference_answer": "Entry age for Term Life Protect is 18 to 60.",
+      "source_article_ids": [
+        "KB-LIF-001"
+      ],
+      "source_chunk_ids": [
+        "KB-LIF-001-01"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-010",
+      "category": "Digital",
+      "test_type": "single_fact",
+      "canonical_question": "How do I register for the MyHarbourline app?",
+      "question_variants": [
+        "How do I sign up for the app?",
+        "Can I log in with Singpass?"
+      ],
+      "reference_answer": "The app is on iOS and Android. Register with Singpass, or with your policy number and a one-time password sent to your email.",
+      "source_article_ids": [
+        "KB-DIG-001"
+      ],
+      "source_chunk_ids": [
+        "KB-DIG-001-01"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-011",
+      "category": "Digital",
+      "test_type": "single_fact",
+      "canonical_question": "What happens if I enter the wrong password too many times?",
+      "question_variants": [
+        "My account is locked, what do I do?",
+        "I forgot my app password"
+      ],
+      "reference_answer": "After 5 failed login attempts the account is locked for 30 minutes. A forgotten password can be reset using Forgot password on the login screen.",
+      "source_article_ids": [
+        "KB-DIG-001"
+      ],
+      "source_chunk_ids": [
+        "KB-DIG-001-03"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-012",
+      "category": "Service",
+      "test_type": "single_fact",
+      "canonical_question": "Where is your customer service centre?",
+      "question_variants": [
+        "Can I visit your office?",
+        "What's your walk-in address?"
+      ],
+      "reference_answer": "The customer service centre is at 10 Harbour Street, #05-01, Singapore 018999, open Monday to Friday 9am to 5pm. Appointments are recommended.",
+      "source_article_ids": [
+        "KB-CON-001"
+      ],
+      "source_chunk_ids": [
+        "KB-CON-001-03"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-013",
+      "category": "General - Cancellation",
+      "test_type": "multi_condition",
+      "canonical_question": "Can I cancel my motor policy and get a refund?",
+      "question_variants": [
+        "I sold my car, can I get money back on my insurance?",
+        "What refund do I get if I cancel my car insurance?"
+      ],
+      "reference_answer": "Motor policies can be cancelled at any time. If no claim has been made in the current period of insurance, the unused premium is refunded on the short-period scale, minus an SGD 30 administration fee. Cancellations are processed within 7 business days and refunds go to the original payment method.",
+      "source_article_ids": [
+        "KB-GEN-001"
+      ],
+      "source_chunk_ids": [
+        "KB-GEN-001-02",
+        "KB-GEN-001-03"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-014",
+      "category": "Payments",
+      "test_type": "multi_condition",
+      "canonical_question": "Can I reinstate a lapsed life policy?",
+      "question_variants": [
+        "My life policy lapsed, can I get it back?",
+        "How do I restore my lapsed policy?"
+      ],
+      "reference_answer": "A lapsed Life policy can be reinstated within 12 months of the lapse date by paying all outstanding premiums plus 5% interest per year. A health declaration may be required. After 12 months it cannot be reinstated and a new application is needed.",
+      "source_article_ids": [
+        "KB-PAY-002"
+      ],
+      "source_chunk_ids": [
+        "KB-PAY-002-03"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-015",
+      "category": "Motor",
+      "test_type": "multi_condition",
+      "canonical_question": "What is the excess for a young driver on a comprehensive policy?",
+      "question_variants": [
+        "My 22 year old son is driving my car, what excess applies if he crashes?",
+        "What's the excess for new drivers?"
+      ],
+      "reference_answer": "The standard own-damage excess is SGD 600. A driver under 26 or with a licence held for less than 2 years adds SGD 2,500. If that driver is also not named on the policy, a further SGD 1,000 applies.",
+      "source_article_ids": [
+        "KB-MTR-001",
+        "KB-MTR-004"
+      ],
+      "source_chunk_ids": [
+        "KB-MTR-001-02",
+        "KB-MTR-004-02"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": "Answer must combine standard and additional excesses."
+    },
+    {
+      "id": "FAQ-016",
+      "category": "Health",
+      "test_type": "multi_condition",
+      "canonical_question": "How do I get a Letter of Guarantee for a hospital admission?",
+      "question_variants": [
+        "Do I need to pay a deposit when I'm admitted?",
+        "How does pre-authorisation work?"
+      ],
+      "reference_answer": "For planned admissions at a Harbourline panel hospital, the doctor requests pre-authorisation at least 3 business days before admission. If approved, a Letter of Guarantee is issued and no upfront deposit is required.",
+      "source_article_ids": [
+        "KB-HLT-002"
+      ],
+      "source_chunk_ids": [
+        "KB-HLT-002-01"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-017",
+      "category": "Home",
+      "test_type": "multi_condition",
+      "canonical_question": "Is water damage covered under home insurance?",
+      "question_variants": [
+        "A pipe burst in my flat, am I covered?",
+        "Does Home Protect cover leaks?"
+      ],
+      "reference_answer": "Water damage from burst pipes and flooding is covered. Damage from gradual leaks or seepage is not covered. The excess is SGD 250 per claim.",
+      "source_article_ids": [
+        "KB-HOM-001"
+      ],
+      "source_chunk_ids": [
+        "KB-HOM-001-02",
+        "KB-HOM-001-03"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-018",
+      "category": "Payments",
+      "test_type": "multi_condition",
+      "canonical_question": "Can I change my premium payment frequency?",
+      "question_variants": [
+        "Can I switch from monthly to annual payments?",
+        "Can I pay my car insurance monthly?"
+      ],
+      "reference_answer": "Life and Health payment frequency can be changed only at the policy anniversary, via the MyHarbourline app or a Policy Alteration Form. Motor and Home premiums are payable annually only.",
+      "source_article_ids": [
+        "KB-PAY-003"
+      ],
+      "source_chunk_ids": [
+        "KB-PAY-003-02"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-019",
+      "category": "Life",
+      "test_type": "multi_condition",
+      "canonical_question": "Can I change my beneficiary?",
+      "question_variants": [
+        "I want to change who gets my life insurance payout",
+        "How do I update my nominee?"
+      ],
+      "reference_answer": "A revocable nomination can be changed at any time without consent, in the MyHarbourline app. An irrevocable nomination can only be changed with the consent of the nominated beneficiaries, using a paper form signed in front of a witness aged at least 21 who is not a beneficiary.",
+      "source_article_ids": [
+        "KB-LIF-002"
+      ],
+      "source_chunk_ids": [
+        "KB-LIF-002-01",
+        "KB-LIF-002-02"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-020",
+      "category": "General - Cancellation",
+      "test_type": "multi_condition",
+      "canonical_question": "Can I cancel my travel insurance?",
+      "question_variants": [
+        "My trip got cancelled, can I get a refund on the insurance?",
+        "Can I get my travel premium back?"
+      ],
+      "reference_answer": "A single-trip Travel policy can be cancelled for a full refund before the departure date, provided no claim has been made. Once cover has started, the premium is not refundable. Travel policies have no free-look period.",
+      "source_article_ids": [
+        "KB-GEN-001"
+      ],
+      "source_chunk_ids": [
+        "KB-GEN-001-02"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-021",
+      "category": "Travel",
+      "test_type": "near_duplicate_trap",
+      "canonical_question": "What is the overseas medical limit on Travel Plus?",
+      "question_variants": [
+        "How much medical cover does Plus give me?",
+        "Plus plan medical expenses limit?"
+      ],
+      "reference_answer": "Travel Plus covers overseas medical expenses up to SGD 500,000 per insured person.",
+      "source_article_ids": [
+        "KB-TRV-001"
+      ],
+      "source_chunk_ids": [
+        "KB-TRV-001-02"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": "Trap: Essential SGD 150,000, Premier SGD 1,000,000."
+    },
+    {
+      "id": "FAQ-022",
+      "category": "Travel",
+      "test_type": "near_duplicate_trap",
+      "canonical_question": "Does Travel Plus cover scuba diving?",
+      "question_variants": [
+        "I'm going diving in Bali on the Plus plan, am I covered?",
+        "Is diving covered on Plus?"
+      ],
+      "reference_answer": "No. Travel Plus does not cover scuba diving. It covers on-piste skiing and snorkelling. Scuba diving to 30 metres is covered only on Travel Premier.",
+      "source_article_ids": [
+        "KB-TRV-002",
+        "KB-TRV-003"
+      ],
+      "source_chunk_ids": [
+        "KB-TRV-003-01",
+        "KB-TRV-002-01"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": "Trap: Premier article covers scuba."
+    },
+    {
+      "id": "FAQ-023",
+      "category": "Travel",
+      "test_type": "near_duplicate_trap",
+      "canonical_question": "How much rental car excess does Travel Premier cover?",
+      "question_variants": [
+        "Premier rental car excess?",
+        "If I crash a hire car on Premier what's covered?"
+      ],
+      "reference_answer": "Travel Premier covers rental car excess up to SGD 1,000.",
+      "source_article_ids": [
+        "KB-TRV-002"
+      ],
+      "source_chunk_ids": [
+        "KB-TRV-002-01"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": "Trap: Plus covers SGD 500."
+    },
+    {
+      "id": "FAQ-024",
+      "category": "Health",
+      "test_type": "near_duplicate_trap",
+      "canonical_question": "What is the deductible on Hospital Care Enhanced?",
+      "question_variants": [
+        "How much do I pay before Enhanced kicks in?",
+        "Enhanced plan deductible?"
+      ],
+      "reference_answer": "The Hospital Care Enhanced deductible is SGD 3,500 per policy year.",
+      "source_article_ids": [
+        "KB-HLT-001"
+      ],
+      "source_chunk_ids": [
+        "KB-HLT-001-02"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": "Trap: Standard deductible is SGD 2,500."
+    },
+    {
+      "id": "FAQ-025",
+      "category": "Health",
+      "test_type": "near_duplicate_trap",
+      "canonical_question": "What is the co-insurance cap on Hospital Care Standard?",
+      "question_variants": [
+        "What's the most co-insurance I pay on Standard?",
+        "Standard plan co-payment limit?"
+      ],
+      "reference_answer": "Hospital Care Standard co-insurance is 10%, capped at SGD 3,000 per policy year.",
+      "source_article_ids": [
+        "KB-HLT-001"
+      ],
+      "source_chunk_ids": [
+        "KB-HLT-001-02"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": "Trap: Enhanced cap is SGD 6,000; Deductible Rider co-payment cap is also SGD 3,000."
+    },
+    {
+      "id": "FAQ-026",
+      "category": "Health",
+      "test_type": "near_duplicate_trap",
+      "canonical_question": "Which ward does Hospital Care Standard cover?",
+      "question_variants": [
+        "Can I stay in a private hospital on Standard?",
+        "What room type is Standard?"
+      ],
+      "reference_answer": "Hospital Care Standard covers stays in a B1 ward at public hospitals. Private hospital standard rooms are covered under Hospital Care Enhanced.",
+      "source_article_ids": [
+        "KB-HLT-001"
+      ],
+      "source_chunk_ids": [
+        "KB-HLT-001-01"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-027",
+      "category": "Health",
+      "test_type": "near_duplicate_trap",
+      "canonical_question": "What is the annual limit on Hospital Care Enhanced?",
+      "question_variants": [
+        "Max claim per year on Enhanced?",
+        "How much will Enhanced pay in a year?"
+      ],
+      "reference_answer": "The Hospital Care Enhanced annual limit is SGD 1,500,000.",
+      "source_article_ids": [
+        "KB-HLT-001"
+      ],
+      "source_chunk_ids": [
+        "KB-HLT-001-02"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": "Trap: Standard is SGD 500,000."
+    },
+    {
+      "id": "FAQ-028",
+      "category": "Motor",
+      "test_type": "near_duplicate_trap",
+      "canonical_question": "Does Third Party Fire and Theft cover damage to my own car in an accident?",
+      "question_variants": [
+        "I have TPFT, someone hit me, will you fix my car?",
+        "Is my car covered for accidents on third party fire and theft?"
+      ],
+      "reference_answer": "No. Third Party Fire and Theft covers liability to others and your own car against fire and theft only. Accidental damage to your own car is covered only under Comprehensive.",
+      "source_article_ids": [
+        "KB-MTR-001"
+      ],
+      "source_chunk_ids": [
+        "KB-MTR-001-01"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-029",
+      "category": "Travel - Claims",
+      "test_type": "cross_article",
+      "canonical_question": "How long does it take to get paid for a travel claim?",
+      "question_variants": [
+        "When will I receive my travel claim money?",
+        "How fast do you pay travel claims?"
+      ],
+      "reference_answer": "Submit the claim within 60 days of returning to Singapore. Most claims are assessed within 14 business days of receiving all documents, and approved claims are paid within 5 business days by PayNow or bank transfer.",
+      "source_article_ids": [
+        "KB-CLM-001",
+        "KB-TRV-004"
+      ],
+      "source_chunk_ids": [
+        "KB-TRV-004-01",
+        "KB-CLM-001-02"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-030",
+      "category": "Life - Claims",
+      "test_type": "cross_article",
+      "canonical_question": "What documents are needed for a death claim if there is no nominated beneficiary?",
+      "question_variants": [
+        "My father passed away and didn't nominate anyone, what do we need to claim?",
+        "Death claim documents without nomination?"
+      ],
+      "reference_answer": "Submit the death certificate, the claimant's identity document, the policy number and proof of relationship, plus a Grant of Probate or Letters of Administration. Without a valid nomination, proceeds are paid to the estate.",
+      "source_article_ids": [
+        "KB-LIF-002",
+        "KB-LIF-003"
+      ],
+      "source_chunk_ids": [
+        "KB-LIF-003-01",
+        "KB-LIF-002-03"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-031",
+      "category": "Motor - Claims",
+      "test_type": "cross_article",
+      "canonical_question": "I've had a car accident, what should I do?",
+      "question_variants": [
+        "Someone crashed into me, what now?",
+        "What are the steps after a motor accident?"
+      ],
+      "reference_answer": "Report the accident to Harbourline within 24 hours or by the next working day, even if not claiming. If anyone is injured, make a police report within 24 hours. Free 24/7 towing to an authorised workshop is available on +65 6000 5678, and Comprehensive repairs must be done at an authorised workshop.",
+      "source_article_ids": [
+        "KB-MTR-003"
+      ],
+      "source_chunk_ids": [
+        "KB-MTR-003-01",
+        "KB-MTR-003-02",
+        "KB-MTR-003-03"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-032",
+      "category": "Travel - Claims",
+      "test_type": "cross_article",
+      "canonical_question": "My bag was stolen overseas, how do I claim?",
+      "question_variants": [
+        "Someone took my luggage in Paris",
+        "How do I claim for stolen baggage?"
+      ],
+      "reference_answer": "Make a police report within 24 hours of discovering the theft. Submit the claim within 60 days of returning to Singapore via the app or claims portal. Baggage limits are SGD 3,000 on Essential, SGD 5,000 on Plus and SGD 8,000 on Premier. Baggage left unattended in a public place is not covered.",
+      "source_article_ids": [
+        "KB-TRV-001",
+        "KB-TRV-004",
+        "KB-TRV-006"
+      ],
+      "source_chunk_ids": [
+        "KB-TRV-004-02",
+        "KB-TRV-004-01",
+        "KB-TRV-001-02",
+        "KB-TRV-006-02"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-033",
+      "category": "Payments",
+      "test_type": "cross_article",
+      "canonical_question": "If my health premium is late, am I still covered?",
+      "question_variants": [
+        "I missed my hospital plan payment",
+        "What happens if I don't pay my health premium?"
+      ],
+      "reference_answer": "Health policies have a 30-day grace period during which cover continues. If still unpaid, the policy lapses and events during the lapse are not covered. It can be reinstated within 12 months by paying outstanding premiums plus 5% interest per year, possibly with a health declaration.",
+      "source_article_ids": [
+        "KB-PAY-002"
+      ],
+      "source_chunk_ids": [
+        "KB-PAY-002-01",
+        "KB-PAY-002-02",
+        "KB-PAY-002-03"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-034",
+      "category": "Claims",
+      "test_type": "cross_article",
+      "canonical_question": "My claim was rejected. How do I appeal and what if I'm still not happy?",
+      "question_variants": [
+        "Can I challenge a rejected claim?",
+        "You rejected my claim, what are my options?"
+      ],
+      "reference_answer": "Appeal within 30 days by providing new information. You can also make a complaint, which is acknowledged within 2 business days and targeted for resolution within 14 business days. If unsatisfied with the final response, refer it to an independent dispute resolution centre within 6 months.",
+      "source_article_ids": [
+        "KB-CLM-001",
+        "KB-CMP-001"
+      ],
+      "source_chunk_ids": [
+        "KB-CLM-001-03",
+        "KB-CMP-001-01",
+        "KB-CMP-001-02"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-035",
+      "category": "Payments",
+      "test_type": "numeric_table",
+      "canonical_question": "How much extra does it cost to pay premiums monthly?",
+      "question_variants": [
+        "Is monthly payment more expensive?",
+        "What's the loading for quarterly payments?"
+      ],
+      "reference_answer": "Monthly payment adds a 5% loading to the annual premium equivalent. Semi-annual adds 2% and quarterly adds 3%. Annual payment has no loading.",
+      "source_article_ids": [
+        "KB-PAY-003"
+      ],
+      "source_chunk_ids": [
+        "KB-PAY-003-01"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-036",
+      "category": "Motor",
+      "test_type": "numeric_table",
+      "canonical_question": "What NCD do I get after 3 claim-free years?",
+      "question_variants": [
+        "I haven't claimed for 3 years, what's my discount?",
+        "NCD for 3 years?"
+      ],
+      "reference_answer": "Three consecutive claim-free years gives a 30% No Claim Discount.",
+      "source_article_ids": [
+        "KB-MTR-002"
+      ],
+      "source_chunk_ids": [
+        "KB-MTR-002-01"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-037",
+      "category": "Motor",
+      "test_type": "numeric_table",
+      "canonical_question": "If I have 50% NCD and make one at-fault claim, what happens to my NCD?",
+      "question_variants": [
+        "Will my NCD drop if I claim?",
+        "I'm on 50% NCD and just had an accident that was my fault"
+      ],
+      "reference_answer": "One at-fault claim drops the NCD by 30 percentage points at renewal, from 50% to 20%. Two or more at-fault claims in the same period reset it to 0%. NCD Protector allows one at-fault claim per period without losing NCD.",
+      "source_article_ids": [
+        "KB-MTR-002"
+      ],
+      "source_chunk_ids": [
+        "KB-MTR-002-02",
+        "KB-MTR-002-03"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-038",
+      "category": "Travel",
+      "test_type": "numeric_table",
+      "canonical_question": "What is the travel delay benefit on Travel Essential?",
+      "question_variants": [
+        "My flight was delayed 12 hours on Essential, what do I get?",
+        "Essential delay payout?"
+      ],
+      "reference_answer": "Travel Essential pays SGD 100 for every 6 hours of delay, up to SGD 500.",
+      "source_article_ids": [
+        "KB-TRV-001"
+      ],
+      "source_chunk_ids": [
+        "KB-TRV-001-02"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-039",
+      "category": "Travel",
+      "test_type": "numeric_table",
+      "canonical_question": "What is the trip cancellation limit on each travel plan?",
+      "question_variants": [
+        "How much trip cancellation cover do I get?",
+        "Compare trip cancellation across plans"
+      ],
+      "reference_answer": "Trip cancellation limits are SGD 5,000 on Essential, SGD 10,000 on Plus and SGD 15,000 on Premier.",
+      "source_article_ids": [
+        "KB-TRV-001"
+      ],
+      "source_chunk_ids": [
+        "KB-TRV-001-02"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-040",
+      "category": "Life",
+      "test_type": "numeric_table",
+      "canonical_question": "How much cover can I get on Term Life Protect and for how long?",
+      "question_variants": [
+        "What sum assured options are there for term life?",
+        "How long can a term life policy run?"
+      ],
+      "reference_answer": "Sum assured ranges from SGD 100,000 to SGD 5,000,000. Coverage terms are 10, 20 or 30 years, or up to age 65.",
+      "source_article_ids": [
+        "KB-LIF-001"
+      ],
+      "source_chunk_ids": [
+        "KB-LIF-001-01"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-041",
+      "category": "Home",
+      "test_type": "numeric_table",
+      "canonical_question": "What is the limit for a single item on home insurance?",
+      "question_variants": [
+        "Is my Rolex covered under Home Protect?",
+        "Per item limit on contents?"
+      ],
+      "reference_answer": "Individual items are covered up to SGD 2,000 each unless declared separately, which is typical for jewellery and watches.",
+      "source_article_ids": [
+        "KB-HOM-001"
+      ],
+      "source_chunk_ids": [
+        "KB-HOM-001-03"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-042",
+      "category": "Travel - Claims",
+      "test_type": "stale_content",
+      "canonical_question": "How long do I have to submit a travel claim?",
+      "question_variants": [
+        "Is there a deadline for travel claims?",
+        "I got back 45 days ago, can I still claim?"
+      ],
+      "reference_answer": "Travel claims must be submitted within 60 days of returning to Singapore.",
+      "source_article_ids": [
+        "KB-TRV-004"
+      ],
+      "source_chunk_ids": [
+        "KB-TRV-004-01"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": "Stale article KB-TRV-005 says 30 days. Answering 30 days is a failure."
+    },
+    {
+      "id": "FAQ-043",
+      "category": "Travel - Claims",
+      "test_type": "stale_content",
+      "canonical_question": "Can I submit my travel claim documents online?",
+      "question_variants": [
+        "Do I need to post the original receipts?",
+        "Where do I send my travel claim?"
+      ],
+      "reference_answer": "Yes. Travel claims are submitted online through the MyHarbourline app or the Harbourline claims portal.",
+      "source_article_ids": [
+        "KB-TRV-004"
+      ],
+      "source_chunk_ids": [
+        "KB-TRV-004-01"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": "Stale article KB-TRV-005 says to mail original documents."
+    },
+    {
+      "id": "FAQ-044",
+      "category": "Travel",
+      "test_type": "stale_content",
+      "canonical_question": "How is the travel delay benefit calculated on Travel Plus?",
+      "question_variants": [
+        "How much do I get for a delayed flight on Plus?",
+        "Plus plan delay compensation?"
+      ],
+      "reference_answer": "Travel Plus pays SGD 100 for every 6 hours of delay, up to SGD 1,000.",
+      "source_article_ids": [
+        "KB-TRV-001"
+      ],
+      "source_chunk_ids": [
+        "KB-TRV-001-02"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": "Stale article KB-TRV-005 says every 8 hours."
+    },
+    {
+      "id": "FAQ-045",
+      "category": "Out of scope",
+      "test_type": "not_covered",
+      "canonical_question": "Do you offer pet insurance?",
+      "question_variants": [
+        "Can I insure my dog?",
+        "Is there cover for vet bills?"
+      ],
+      "reference_answer": "Not covered by the knowledge base. The agent should say it cannot help with this and offer to connect the customer to the customer hotline or a human agent. It must not invent products, benefits or values.",
+      "source_article_ids": [],
+      "source_chunk_ids": [],
+      "expected_classification": "DECLINE",
+      "notes": "No pet product in KB."
+    },
+    {
+      "id": "FAQ-046",
+      "category": "Out of scope",
+      "test_type": "not_covered",
+      "canonical_question": "Do you have a critical illness plan?",
+      "question_variants": [
+        "Is there cover for cancer diagnosis payout?",
+        "Critical illness insurance?"
+      ],
+      "reference_answer": "Not covered by the knowledge base. The agent should say it cannot help with this and offer to connect the customer to the customer hotline or a human agent. It must not invent products, benefits or values.",
+      "source_article_ids": [],
+      "source_chunk_ids": [],
+      "expected_classification": "DECLINE",
+      "notes": "Trap: terminal illness advance on Term Life is not a critical illness plan."
+    },
+    {
+      "id": "FAQ-047",
+      "category": "Out of scope",
+      "test_type": "not_covered",
+      "canonical_question": "Can you insure my shop premises?",
+      "question_variants": [
+        "Do you do business insurance?",
+        "Commercial property cover?"
+      ],
+      "reference_answer": "Not covered by the knowledge base. The agent should say it cannot help with this and offer to connect the customer to the customer hotline or a human agent. It must not invent products, benefits or values.",
+      "source_article_ids": [],
+      "source_chunk_ids": [],
+      "expected_classification": "DECLINE",
+      "notes": "Home Protect is residential only by implication; no commercial product in KB."
+    },
+    {
+      "id": "FAQ-048",
+      "category": "Out of scope",
+      "test_type": "not_covered",
+      "canonical_question": "Should I buy a whole life plan or invest in ETFs instead?",
+      "question_variants": [
+        "Is term life better than investing?",
+        "Which is a better investment?"
+      ],
+      "reference_answer": "Not covered by the knowledge base. The agent should say it cannot help with this and offer to connect the customer to the customer hotline or a human agent. It must not invent products, benefits or values.",
+      "source_article_ids": [],
+      "source_chunk_ids": [],
+      "expected_classification": "DECLINE",
+      "notes": "Financial advice. Whole life conversion is mentioned but no whole life product details or advice exist."
+    },
+    {
+      "id": "FAQ-049",
+      "category": "Out of scope",
+      "test_type": "not_covered",
+      "canonical_question": "What is the cash surrender value of my Term Life Protect policy?",
+      "question_variants": [
+        "How much will I get if I surrender my term life?",
+        "Surrender value of term policy?"
+      ],
+      "reference_answer": "Not covered by the knowledge base. The agent should say it cannot help with this and offer to connect the customer to the customer hotline or a human agent. It must not invent products, benefits or values.",
+      "source_article_ids": [],
+      "source_chunk_ids": [],
+      "expected_classification": "DECLINE",
+      "notes": "Hallucination trap: KB has no surrender value information."
+    },
+    {
+      "id": "FAQ-050",
+      "category": "Out of scope",
+      "test_type": "not_covered",
+      "canonical_question": "Can I buy motor insurance for my motorcycle?",
+      "question_variants": [
+        "Do you cover motorbikes?",
+        "Motorcycle insurance?"
+      ],
+      "reference_answer": "Not covered by the knowledge base. The agent should say it cannot help with this and offer to connect the customer to the customer hotline or a human agent. It must not invent products, benefits or values.",
+      "source_article_ids": [],
+      "source_chunk_ids": [],
+      "expected_classification": "DECLINE",
+      "notes": "KB does not state vehicle types covered."
+    },
+    {
+      "id": "FAQ-051",
+      "category": "Clarification",
+      "test_type": "ambiguous",
+      "canonical_question": "How do I make a claim?",
+      "question_variants": [
+        "I want to claim",
+        "How do claims work?"
+      ],
+      "reference_answer": "The agent should ask which policy the claim is for (Travel, Motor, Health, Home or Life), since the process differs by policy.",
+      "source_article_ids": [],
+      "source_chunk_ids": [],
+      "expected_classification": "CLARIFY",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-052",
+      "category": "Clarification",
+      "test_type": "ambiguous",
+      "canonical_question": "What's the excess?",
+      "question_variants": [
+        "How much excess do I pay?",
+        "Is there an excess?"
+      ],
+      "reference_answer": "The agent should ask which policy or plan the customer means (e.g., Motor or Home), since excess amounts differ.",
+      "source_article_ids": [],
+      "source_chunk_ids": [],
+      "expected_classification": "CLARIFY",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-053",
+      "category": "Clarification",
+      "test_type": "ambiguous",
+      "canonical_question": "How much does my plan cover?",
+      "question_variants": [
+        "What's my coverage limit?",
+        "What's the limit on my plan?"
+      ],
+      "reference_answer": "The agent should ask which product and plan the customer has, since limits differ across Travel, Health and Home plans.",
+      "source_article_ids": [],
+      "source_chunk_ids": [],
+      "expected_classification": "CLARIFY",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-054",
+      "category": "Clarification",
+      "test_type": "ambiguous",
+      "canonical_question": "Can I cancel?",
+      "question_variants": [
+        "I want to cancel",
+        "How do I cancel?"
+      ],
+      "reference_answer": "The agent should ask which policy the customer wants to cancel, since free-look, refund and cancellation rules differ by policy type.",
+      "source_article_ids": [],
+      "source_chunk_ids": [],
+      "expected_classification": "CLARIFY",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-055",
+      "category": "Payments",
+      "test_type": "multi_part",
+      "canonical_question": "What payment methods do you accept, and how long does GIRO take to set up?",
+      "question_variants": [
+        "Can I pay by GIRO and how long before it starts? Also do you take PayNow?"
+      ],
+      "reference_answer": "Visa and Mastercard cards, GIRO, PayNow and bank transfer are accepted; American Express is not. GIRO setup takes up to 3 weeks, so the first premium should be paid by card or PayNow.",
+      "source_article_ids": [
+        "KB-PAY-001"
+      ],
+      "source_chunk_ids": [
+        "KB-PAY-001-01",
+        "KB-PAY-001-02"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-056",
+      "category": "Travel",
+      "test_type": "multi_part",
+      "canonical_question": "What is the medical cover on Travel Premier, and can I include my kids?",
+      "question_variants": [
+        "How much medical cover does Premier have and does family cover include children?"
+      ],
+      "reference_answer": "Travel Premier covers overseas medical expenses up to SGD 1,000,000. Family cover on Premier covers 2 adults and any number of children under 18 travelling with them.",
+      "source_article_ids": [
+        "KB-TRV-001"
+      ],
+      "source_chunk_ids": [
+        "KB-TRV-001-02",
+        "KB-TRV-001-03"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-057",
+      "category": "Health",
+      "test_type": "multi_part",
+      "canonical_question": "What is the waiting period on Hospital Care, and is cataract surgery covered straight away?",
+      "question_variants": [
+        "When does my hospital cover start, and is cataract covered?"
+      ],
+      "reference_answer": "Illnesses have a 30-day waiting period from the policy start date, and accidents are covered from day one. Cataract has a 12-month waiting period.",
+      "source_article_ids": [
+        "KB-HLT-003"
+      ],
+      "source_chunk_ids": [
+        "KB-HLT-003-01",
+        "KB-HLT-003-02"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": ""
+    },
+    {
+      "id": "FAQ-058",
+      "category": "Travel",
+      "test_type": "follow_up",
+      "canonical_question": "What is the age limit for annual multi-trip travel plans?",
+      "question_variants": [
+        "And for annual plans?",
+        "What about the annual one?"
+      ],
+      "reference_answer": "Annual multi-trip plans cover travellers up to age 70 at the date of purchase.",
+      "source_article_ids": [
+        "KB-TRV-001"
+      ],
+      "source_chunk_ids": [
+        "KB-TRV-001-03"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": "Preceding turn: customer asks the age limit for single-trip plans (answer: up to 80). Variants only make sense after that turn."
+    },
+    {
+      "id": "FAQ-059",
+      "category": "Health",
+      "test_type": "follow_up",
+      "canonical_question": "Does the Deductible Rider cover the Hospital Care Enhanced deductible?",
+      "question_variants": [
+        "Does the rider cover that?",
+        "Can I get a rider for it?"
+      ],
+      "reference_answer": "Yes. The Deductible Rider is available on both plans and covers the deductible and co-insurance, leaving a minimum 5% co-payment capped at SGD 3,000 per policy year.",
+      "source_article_ids": [
+        "KB-HLT-001"
+      ],
+      "source_chunk_ids": [
+        "KB-HLT-001-03"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": "Preceding turn: customer asks the Enhanced deductible (SGD 3,500)."
+    },
+    {
+      "id": "FAQ-060",
+      "category": "Life",
+      "test_type": "follow_up",
+      "canonical_question": "Can I convert Term Life Protect to a whole life plan?",
+      "question_variants": [
+        "Can I convert it later?",
+        "Can I switch it to whole life?"
+      ],
+      "reference_answer": "Before age 60, Term Life Protect can be converted to a Harbourline whole life plan up to the original sum assured, without medical underwriting.",
+      "source_article_ids": [
+        "KB-LIF-001"
+      ],
+      "source_chunk_ids": [
+        "KB-LIF-001-03"
+      ],
+      "expected_classification": "ANSWER",
+      "notes": "Preceding turn: customer asks about Term Life Protect coverage terms."
+    }
+  ]
+}

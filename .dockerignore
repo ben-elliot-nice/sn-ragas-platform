@@ -1,0 +1,16 @@
+.git
+.gitignore
+.env
+.env.example
+.venv
+__pycache__
+*.pyc
+tests/
+scripts/
+eval_log.jsonl
+*.md
+.claude/
+.DS_Store
+pytest.ini
+railway.json
+Procfile

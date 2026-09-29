@@ -1,0 +1,7 @@
+.env
+eval_log.jsonl
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+.DS_Store

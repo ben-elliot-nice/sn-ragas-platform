@@ -31,13 +31,19 @@ def strip_chunk_id_prefix(text: str) -> str:
     return _CHUNK_PREFIX_RE.sub("", text, count=1)
 
 
-def build_metrics(ragas_llm, ragas_embeddings) -> Dict[str, object]:
+def build_metrics(new_ragas_llm, ragas_embeddings) -> Dict[str, object]:
+    """`new_ragas_llm` is a zero-arg factory, called once per metric, so each
+    metric gets its own chat model instance rather than sharing one (see
+    Clients.new_ragas_llm's docstring for why sharing races under
+    asyncio.gather). `ragas_embeddings` is shared: embedding calls don't
+    mutate shared per-call state the way the chat model wrapper does.
+    """
     return {
-        "faithfulness": Faithfulness(llm=ragas_llm),
-        "factual_correctness": FactualCorrectness(llm=ragas_llm, mode="f1"),
-        "response_relevancy": ResponseRelevancy(llm=ragas_llm, embeddings=ragas_embeddings),
-        "context_recall": LLMContextRecall(llm=ragas_llm),
-        "context_precision": LLMContextPrecisionWithReference(llm=ragas_llm),
+        "faithfulness": Faithfulness(llm=new_ragas_llm()),
+        "factual_correctness": FactualCorrectness(llm=new_ragas_llm(), mode="f1"),
+        "response_relevancy": ResponseRelevancy(llm=new_ragas_llm(), embeddings=ragas_embeddings),
+        "context_recall": LLMContextRecall(llm=new_ragas_llm()),
+        "context_precision": LLMContextPrecisionWithReference(llm=new_ragas_llm()),
     }
 
 

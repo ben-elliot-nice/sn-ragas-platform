@@ -43,7 +43,7 @@ async def startup() -> None:
         logger.warning("Embedding golden set entries on the fly at startup (no precomputed cache found).")
         await _golden_set.ensure_embeddings(clients.embedding_client.embed_many)
 
-    _metrics_by_name = build_metrics(clients.ragas_llm, clients.ragas_embeddings)
+    _metrics_by_name = build_metrics(clients.new_ragas_llm, clients.ragas_embeddings)
 
 
 def _error_body(status: int, error_code: str, message: str, eval_id: str) -> JSONResponse:

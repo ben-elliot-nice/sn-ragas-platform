@@ -74,6 +74,20 @@ class Clients:
     def ragas_llm(self) -> LangchainLLMWrapper:
         return LangchainLLMWrapper(self.judge_chat_model)
 
+    def new_ragas_llm(self) -> LangchainLLMWrapper:
+        """A LangchainLLMWrapper around a FRESH, independent ChatOpenAI instance.
+
+        Ragas's LangchainLLMWrapper mutates its wrapped chat model's `.n` and
+        `.temperature` attributes in place around each call (to request
+        multiple sampled generations for metrics like ResponseRelevancy).
+        Since the 5 Ragas metrics run concurrently via asyncio.gather, sharing
+        one chat model instance across them races: one metric's mutation can
+        clobber another's mid-flight, silently degrading e.g. ResponseRelevancy
+        from 3 requested generations down to 1. Each metric needs its own
+        chat model instance, not just its own wrapper around a shared one.
+        """
+        return LangchainLLMWrapper(build_judge_chat_model())
+
     @property
     def ragas_embeddings(self) -> LangchainEmbeddingsWrapper:
         return LangchainEmbeddingsWrapper(self.embedding_model)

@@ -21,7 +21,7 @@ def test_request_matches_spec_example():
     }
     request = EvaluateRequest.model_validate(payload)
     assert request.session_id == "sess-1"
-    assert request.retrieved_contexts[0].rank == 2  # BROKEN: should be 1
+    assert request.retrieved_contexts[0].rank == 1
 
 
 def test_response_round_trip_matches_spec_shape():

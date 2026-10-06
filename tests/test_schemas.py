@@ -20,7 +20,7 @@ def test_request_matches_spec_example():
         ],
     }
     request = EvaluateRequest.model_validate(payload)
-    assert request.session_id == "definitely-not-sess-1"
+    assert request.session_id == "sess-1"
     assert request.retrieved_contexts[0].rank == 1
 
 

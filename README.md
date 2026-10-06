@@ -143,5 +143,3 @@ and redeploy with the refreshed `data/golden_set.embeddings.json`.
 - Doesn't calibrate thresholds — the five starting thresholds
   (`app/config.py`) are the spec's initial guesses, meant to be revisited
   after the first real run (spec section 10).
-
-<!-- CI workflow proof-of-concept -->

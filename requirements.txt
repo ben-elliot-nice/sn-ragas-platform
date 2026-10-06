@@ -6,3 +6,4 @@ langchain-openai==0.3.35
 langchain-core==0.3.86
 pydantic==2.13.5
 numpy>=1.26,<3
+httpx==0.28.1

@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from typing import List, Literal, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 Classification = Literal["ANSWER", "CLARIFY", "DECLINE"]
 OutcomeValue = Literal["pass", "fail", "unverified", "not_scored", "skipped", "error"]
@@ -30,6 +30,18 @@ class EvaluateRequest(BaseModel):
     recent_turns: List[Turn] = Field(default_factory=list)
     response: str
     retrieved_contexts: List[RetrievedContext] = Field(default_factory=list)
+    # Async mode: when true the service answers 202 straight away and writes
+    # the result onto the Cognigy analytics record itself (PATCH
+    # /v2.0/analytics), which needs these two IDs alongside session/input.
+    writeback: bool = False
+    contact_id: Optional[str] = None
+    project_id: Optional[str] = None
+
+    @model_validator(mode="after")
+    def _writeback_needs_ids(self):
+        if self.writeback and not (self.contact_id and self.project_id):
+            raise ValueError("writeback=true requires contact_id and project_id")
+        return self
 
 
 class MatchOut(BaseModel):
@@ -68,6 +80,11 @@ class EvaluateResponse(BaseModel):
     retrieval_check: RetrievalCheckOut
     ragas_version: str
     judge_model: str
+
+
+class AcceptedResponse(BaseModel):
+    eval_id: str
+    status: Literal["accepted"] = "accepted"
 
 
 class ErrorResponse(BaseModel):

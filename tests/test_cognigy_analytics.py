@@ -97,7 +97,7 @@ def _client(handler):
 
 
 @pytest.mark.asyncio
-async def test_patch_sends_record_keys_and_properties():
+async def test_patch_sends_both_contact_id_forms():
     seen = []
 
     def handler(req: httpx.Request):
@@ -106,13 +106,19 @@ async def test_patch_sends_record_keys_and_properties():
 
     outcome = await _client(handler).patch_record(make_request(), {"custom9": "A:pass|R:pass|V:pass"})
 
-    assert outcome == {"status": 204, "attempts": 1, "error": None}
+    assert outcome["status"] == 204
+    assert outcome["error"] is None
+    assert outcome["attempts"] == 2
+    assert [json.loads(r.content)["contactId"] for r in seen] == [
+        "user@example.com",
+        analytics_contact_id("user@example.com"),
+    ]
     req = seen[0]
     assert req.method == "PATCH"
     assert str(req.url) == "https://api.example.cognigy.ai/new/v2.0/analytics"
     assert req.headers["X-API-Key"] == "cognigy-key"
     assert json.loads(req.content) == {
-        "contactId": analytics_contact_id("user@example.com"),
+        "contactId": "user@example.com",
         "projectId": "6ab9d449a3709e53b89767da",
         "sessionId": "s1",
         "inputId": "i1",
@@ -121,14 +127,31 @@ async def test_patch_sends_record_keys_and_properties():
 
 
 @pytest.mark.asyncio
+async def test_patch_succeeds_if_only_hashed_form_is_accepted():
+    hashed = analytics_contact_id("user@example.com")
+
+    def handler(req):
+        if json.loads(req.content)["contactId"] == hashed:
+            return httpx.Response(204)
+        return httpx.Response(401, text="Invalid contact ID")
+
+    outcome = await _client(handler).patch_record(make_request(), {})
+    assert outcome["status"] == 204
+    assert outcome["error"] is None
+    assert outcome["by_contact_id"]["user@example.com"]["status"] == 401
+
+
+@pytest.mark.asyncio
 async def test_patch_retries_until_record_exists():
     statuses = [404, 404, 204]
 
     def handler(req):
+        if json.loads(req.content)["contactId"] != "user@example.com":
+            return httpx.Response(204)
         return httpx.Response(statuses.pop(0))
 
     outcome = await _client(handler).patch_record(make_request(), {})
-    assert outcome == {"status": 204, "attempts": 3, "error": None}
+    assert outcome["by_contact_id"]["user@example.com"] == {"status": 204, "attempts": 3, "error": None}
 
 
 @pytest.mark.asyncio
@@ -140,7 +163,7 @@ async def test_patch_does_not_retry_auth_failure():
         return httpx.Response(401, text="bad key")
 
     outcome = await _client(handler).patch_record(make_request(), {})
-    assert len(calls) == 1
+    assert len(calls) == 2  # one per contactId form, no retries
     assert outcome["status"] == 401
     assert outcome["error"] == "bad key"
 
@@ -152,7 +175,7 @@ async def test_patch_gives_up_after_retries_on_network_error():
 
     outcome = await _client(handler).patch_record(make_request(), {})
     assert outcome["status"] is None
-    assert outcome["attempts"] == 3
+    assert outcome["attempts"] == 6  # 3 per contactId form
     assert "ConnectError" in outcome["error"]
 
 

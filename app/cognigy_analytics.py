@@ -8,10 +8,12 @@ immediately and writes custom1-custom10 itself once scoring finishes.
 The PATCH merges: only the properties sent are changed (confirmed 5 Oct 2026),
 so sending custom1-custom10 leaves intent, flowName etc. untouched.
 
-contactId on the analytics record is the MD5 hex of the Cognigy userId
-(confirmed 6 Oct 2026: md5("simulation-claude-test") ==
-"92af4721b6dcdf7952bc1133cfe9a179" in OData). The flow sends the plain
-userId as contact_id; it's hashed here before the PATCH.
+contactId on the analytics record depends on the channel (confirmed 7 Oct
+2026 via OData): REST stores md5(userId) ("simulation-claude-test" ->
+"92af4721b6dcdf7952bc1133cfe9a179"), the Interaction Panel (adminconsole)
+stores the plain userId ("shannon.nguyen@nice.com"). The flow sends the plain
+userId as contact_id, so the PATCH is sent with both forms. Only the one that
+matches the record changes anything.
 
 The first PATCH waits COGNIGY_WRITEBACK_DELAY_SECONDS (default 30). Writes
 sent ~8s after the turn (straight after scoring) were accepted but never
@@ -89,38 +91,59 @@ class CognigyAnalyticsClient:
         self._transport = transport
 
     async def patch_record(self, request: EvaluateRequest, properties: Dict[str, str]) -> Dict:
-        """PATCHes the record, retrying on transient/not-yet-written failures.
-        Returns {"status": int|None, "attempts": int, "error": str|None}."""
-        body = {
-            "contactId": analytics_contact_id(request.contact_id),
-            "projectId": request.project_id,
-            "sessionId": request.session_id,
-            "inputId": request.input_id,
-            "properties": properties,
-        }
+        """PATCHes the record with each contactId form (plain, then MD5),
+        retrying each on transient/not-yet-written failures.
+        Returns {"status", "attempts", "error", "by_contact_id"}; status/error
+        are from the first form that succeeded, else the last one tried."""
         headers = {"Content-Type": "application/json", "X-API-Key": self.api_key}
+        contact_ids = list(dict.fromkeys([request.contact_id, analytics_contact_id(request.contact_id)]))
 
+        if self.initial_delay:
+            await asyncio.sleep(self.initial_delay)
+
+        outcomes = []
+        async with httpx.AsyncClient(timeout=15, transport=self._transport) as client:
+            for contact_id in contact_ids:
+                body = {
+                    "contactId": contact_id,
+                    "projectId": request.project_id,
+                    "sessionId": request.session_id,
+                    "inputId": request.input_id,
+                    "properties": properties,
+                }
+                outcomes.append((contact_id, await self._patch_with_retries(client, body, headers)))
+
+        succeeded = [o for _, o in outcomes if o["error"] is None]
+        chosen = succeeded[0] if succeeded else outcomes[-1][1]
+        result = {
+            "status": chosen["status"],
+            "attempts": sum(o["attempts"] for _, o in outcomes),
+            "error": chosen["error"],
+            "by_contact_id": {cid: o for cid, o in outcomes},
+        }
+        if not succeeded:
+            logger.warning(
+                "Cognigy analytics PATCH failed for session=%s input=%s: %s",
+                request.session_id, request.input_id, result["by_contact_id"],
+            )
+        return result
+
+    async def _patch_with_retries(self, client: httpx.AsyncClient, body: Dict, headers: Dict) -> Dict:
         status: Optional[int] = None
         error: Optional[str] = None
         attempts = 0
-        async with httpx.AsyncClient(timeout=15, transport=self._transport) as client:
-            for delay in (self.initial_delay, *self.retry_delays):
-                if delay:
-                    await asyncio.sleep(delay)
-                attempts += 1
-                try:
-                    resp = await client.patch(self.url, json=body, headers=headers)
-                    status, error = resp.status_code, None
-                    if resp.is_success:
-                        return {"status": status, "attempts": attempts, "error": None}
-                    error = resp.text[:500]
-                    if status not in RETRYABLE_STATUSES:
-                        break
-                except httpx.HTTPError as e:
-                    status, error = None, f"{type(e).__name__}: {e}"
-
-        logger.warning(
-            "Cognigy analytics PATCH failed for session=%s input=%s after %d attempts: status=%s %s",
-            request.session_id, request.input_id, attempts, status, error,
-        )
+        for delay in (0, *self.retry_delays):
+            if delay:
+                await asyncio.sleep(delay)
+            attempts += 1
+            try:
+                resp = await client.patch(self.url, json=body, headers=headers)
+                status, error = resp.status_code, None
+                if resp.is_success:
+                    return {"status": status, "attempts": attempts, "error": None}
+                error = resp.text[:500]
+                if status not in RETRYABLE_STATUSES:
+                    break
+            except httpx.HTTPError as e:
+                status, error = None, f"{type(e).__name__}: {e}"
         return {"status": status, "attempts": attempts, "error": error}

@@ -8,6 +8,9 @@
 - Live URL: `https://ragas.nice-agentic.com` (Cloudflare CNAME, DNS-only, zone `nice-agentic.com`).
 - `API_KEY` / `OPENAI_API_KEY` live as `SECRET`-type env vars on the DO app spec directly — never in this repo, never in CI.
 - CI/CD: `.github/workflows/ci.yml`. Tests run on every PR and push to `main`; merging to `main` auto-builds, pushes, and deploys. `main` is protected — the `test` check must pass, enforced even for admins.
+- Branch protection is classic protection (not Rulesets) — a ruleset was briefly tried during setup but needs a paid/org GitHub tier to enforce, so it was deleted; classic protection is the sole, intentional gate.
+- There's no `paths-ignore` filter: merging *any* change to `main`, including docs-only ones, triggers a full rebuild/redeploy of production. Expected, not a bug.
+- `API_KEY` for the authenticated `/evaluate` smoke test below isn't in this repo — it only exists as a `SECRET` env var on the DO app spec, so you need DO control panel access (or an existing copy) to get it.
 
 ## If a change ever arrives as a zip instead of a PR
 
@@ -26,6 +29,17 @@ which CI gates automatically. If one arrives anyway:
 4. Let CI run; once the `test` check is green, merge.
 5. Merging to `main` auto-deploys. Verify via `/health` and one authenticated
    `/evaluate` call against `https://ragas.nice-agentic.com`.
+
+## Manual rollback
+
+Every image is pushed tagged both `:latest` and `:<git-sha>` so this is possible:
+
+```
+docker pull registry.digitalocean.com/sn-ragas-platform/sn-ragas-platform:<good-sha>
+docker tag registry.digitalocean.com/sn-ragas-platform/sn-ragas-platform:<good-sha> registry.digitalocean.com/sn-ragas-platform/sn-ragas-platform:latest
+docker push registry.digitalocean.com/sn-ragas-platform/sn-ragas-platform:latest
+doctl apps create-deployment aade8c38-7593-4c7a-abd9-94e351d4e34d --wait
+```
 
 ## Reference (not explained here)
 

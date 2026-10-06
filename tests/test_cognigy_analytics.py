@@ -90,6 +90,7 @@ def _client(handler):
     return CognigyAnalyticsClient(
         "https://api.example.cognigy.ai/new/",
         "cognigy-key",
+        initial_delay=0,
         retry_delays=(0.01, 0.01),
         transport=httpx.MockTransport(handler),
     )
@@ -153,3 +154,24 @@ async def test_patch_gives_up_after_retries_on_network_error():
     assert outcome["status"] is None
     assert outcome["attempts"] == 3
     assert "ConnectError" in outcome["error"]
+
+
+@pytest.mark.asyncio
+async def test_first_patch_waits_initial_delay():
+    import time
+
+    sent_at = []
+
+    def handler(req):
+        sent_at.append(time.monotonic())
+        return httpx.Response(204)
+
+    client = CognigyAnalyticsClient(
+        "https://api.example.cognigy.ai/new",
+        "k",
+        initial_delay=0.2,
+        transport=httpx.MockTransport(handler),
+    )
+    start = time.monotonic()
+    await client.patch_record(make_request(), {})
+    assert sent_at[0] - start >= 0.2

@@ -63,6 +63,9 @@ class Settings:
         # https://api-trial.cognigy.ai/new
         self.cognigy_api_base_url = os.environ.get("COGNIGY_API_BASE_URL", "")
         self.cognigy_api_key = os.environ.get("COGNIGY_API_KEY", "")
+        # Wait before the first PATCH so Cognigy has stored the turn's
+        # analytics record (see app/cognigy_analytics.py).
+        self.cognigy_writeback_delay_seconds = float(os.environ.get("COGNIGY_WRITEBACK_DELAY_SECONDS", "30"))
 
         raw_thresholds = os.environ.get("THRESHOLDS", "").strip()
         overrides = json.loads(raw_thresholds) if raw_thresholds else {}

@@ -98,12 +98,19 @@ the request above.
 
 The service then scores in the background and writes `custom1`–`custom10`
 onto that turn's Cognigy analytics record with `PATCH /v2.0/analytics`
-(`app/cognigy_analytics.py`). The PATCH merges, so other fields on the
+(`app/cognigy_analytics.py`). `contact_id` is the plain Cognigy userId;
+the service MD5-hashes it, because that's how Cognigy stores `contactId` on
+analytics records. The PATCH merges, so other fields on the
 record are untouched. It retries on 400/404/5xx/network errors (2s, 5s, 10s,
 20s) in case the record hasn't been written yet. If the eval itself fails,
 it still PATCHes `custom9 = A:error|R:error|V:error` and
 `custom10 = <run_id>|error-<code>`. Every write-back attempt is logged as a
 `"type": "writeback"` line in the result log, with the final status.
+
+Ragas usage telemetry is switched off (`RAGAS_DO_NOT_TRACK=true`, set in
+`app/config.py`). It sends a blocking HTTP request on every Ragas LLM and
+embedding call, which stalled the whole server while a background eval ran
+and roughly doubled eval time.
 
 Needs `COGNIGY_API_BASE_URL` and `COGNIGY_API_KEY` set; without them a
 `writeback: true` call returns `500` `config`. Without `writeback` the
@@ -131,7 +138,7 @@ or `504` (judge LLM timed out).
 | `app/evaluate.py` | Orchestrates the above into one pipeline |
 | `data/` | Bundled copy of the golden set + its embedding cache, for deployment |
 | `scripts/precompute_golden_set_embeddings.py` | Rebuilds `data/golden_set.embeddings.json` after the golden set changes |
-| `tests/` | 39 unit tests — everything except live Ragas metric scoring is tested with fakes (no OpenAI key needed) |
+| `tests/` | 40 unit tests — everything except live Ragas metric scoring is tested with fakes (no OpenAI key needed) |
 
 ## Running it locally
 

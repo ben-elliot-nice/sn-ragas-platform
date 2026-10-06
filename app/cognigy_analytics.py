@@ -8,6 +8,11 @@ immediately and writes custom1-custom10 itself once scoring finishes.
 The PATCH merges: only the properties sent are changed (confirmed 5 Oct 2026),
 so sending custom1-custom10 leaves intent, flowName etc. untouched.
 
+contactId on the analytics record is the MD5 hex of the Cognigy userId
+(confirmed 6 Oct 2026: md5("simulation-claude-test") ==
+"92af4721b6dcdf7952bc1133cfe9a179" in OData). The flow sends the plain
+userId as contact_id; it's hashed here before the PATCH.
+
 The analytics record is written when Cognigy finishes processing the turn.
 That's normally long before the eval finishes, but the PATCH is retried in
 case it lands first.
@@ -15,6 +20,7 @@ case it lands first.
 from __future__ import annotations
 
 import asyncio
+import hashlib
 import logging
 from typing import Dict, Optional, Sequence
 
@@ -33,6 +39,10 @@ RETRYABLE_STATUSES = {400, 404, 408, 429, 500, 502, 503, 504}
 
 def _fmt(value) -> str:
     return str(value) if value is not None else NA
+
+
+def analytics_contact_id(user_id: str) -> str:
+    return hashlib.md5(user_id.encode("utf-8")).hexdigest()
 
 
 def custom_fields_from_result(result: EvaluateResponse, run_id: str) -> Dict[str, str]:
@@ -76,7 +86,7 @@ class CognigyAnalyticsClient:
         """PATCHes the record, retrying on transient/not-yet-written failures.
         Returns {"status": int|None, "attempts": int, "error": str|None}."""
         body = {
-            "contactId": request.contact_id,
+            "contactId": analytics_contact_id(request.contact_id),
             "projectId": request.project_id,
             "sessionId": request.session_id,
             "inputId": request.input_id,

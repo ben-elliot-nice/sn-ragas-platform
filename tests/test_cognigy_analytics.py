@@ -6,6 +6,7 @@ from pydantic import ValidationError
 
 from app.cognigy_analytics import (
     CognigyAnalyticsClient,
+    analytics_contact_id,
     custom_fields_for_error,
     custom_fields_from_result,
 )
@@ -73,6 +74,11 @@ def test_error_fields():
     }
 
 
+def test_contact_id_is_md5_of_user_id_like_cognigy_analytics():
+    # Value read back from Cognigy OData for userId "simulation-claude-test".
+    assert analytics_contact_id("simulation-claude-test") == "92af4721b6dcdf7952bc1133cfe9a179"
+
+
 def test_writeback_requires_contact_and_project_ids():
     with pytest.raises(ValidationError):
         make_request(contact_id=None)
@@ -105,7 +111,7 @@ async def test_patch_sends_record_keys_and_properties():
     assert str(req.url) == "https://api.example.cognigy.ai/new/v2.0/analytics"
     assert req.headers["X-API-Key"] == "cognigy-key"
     assert json.loads(req.content) == {
-        "contactId": "user@example.com",
+        "contactId": analytics_contact_id("user@example.com"),
         "projectId": "6ab9d449a3709e53b89767da",
         "sessionId": "s1",
         "inputId": "i1",

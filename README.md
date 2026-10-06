@@ -101,8 +101,11 @@ onto that turn's Cognigy analytics record with `PATCH /v2.0/analytics`
 (`app/cognigy_analytics.py`). `contact_id` is the plain Cognigy userId;
 the service MD5-hashes it, because that's how Cognigy stores `contactId` on
 analytics records. The PATCH merges, so other fields on the
-record are untouched. It retries on 400/404/5xx/network errors (2s, 5s, 10s,
-20s) in case the record hasn't been written yet. If the eval itself fails,
+record are untouched. The first PATCH waits 30s
+(`COGNIGY_WRITEBACK_DELAY_SECONDS`): writes sent sooner after the turn were
+accepted by Cognigy but never appeared on the record, apparently because the
+record isn't stored yet. After that it retries on 400/404/5xx/network errors
+(2s, 5s, 10s, 20s). Custom fields appear roughly 40s after the turn. If the eval itself fails,
 it still PATCHes `custom9 = A:error|R:error|V:error` and
 `custom10 = <run_id>|error-<code>`. Every write-back attempt is logged as a
 `"type": "writeback"` line in the result log, with the final status.
@@ -138,7 +141,7 @@ or `504` (judge LLM timed out).
 | `app/evaluate.py` | Orchestrates the above into one pipeline |
 | `data/` | Bundled copy of the golden set + its embedding cache, for deployment |
 | `scripts/precompute_golden_set_embeddings.py` | Rebuilds `data/golden_set.embeddings.json` after the golden set changes |
-| `tests/` | 40 unit tests — everything except live Ragas metric scoring is tested with fakes (no OpenAI key needed) |
+| `tests/` | 41 unit tests — everything except live Ragas metric scoring is tested with fakes (no OpenAI key needed) |
 
 ## Running it locally
 

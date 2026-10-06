@@ -13,9 +13,12 @@ contactId on the analytics record is the MD5 hex of the Cognigy userId
 "92af4721b6dcdf7952bc1133cfe9a179" in OData). The flow sends the plain
 userId as contact_id; it's hashed here before the PATCH.
 
-The analytics record is written when Cognigy finishes processing the turn.
-That's normally long before the eval finishes, but the PATCH is retried in
-case it lands first.
+The first PATCH waits COGNIGY_WRITEBACK_DELAY_SECONDS (default 30). Writes
+sent ~8s after the turn (straight after scoring) were accepted but never
+showed up on the record, while the same write sent 24s+ after the turn
+landed every time (tested 7 Oct 2026). Cognigy evidently hasn't stored the
+turn's analytics record yet that soon after the turn, and doesn't report an
+error, so the 404/400 retries below never fire for it.
 """
 from __future__ import annotations
 
@@ -31,6 +34,7 @@ from .schemas import EvaluateRequest, EvaluateResponse
 logger = logging.getLogger(__name__)
 
 NA = "na"
+INITIAL_DELAY_SECONDS: float = 30
 RETRY_DELAYS_SECONDS: Sequence[float] = (2, 5, 10, 20)
 # 400 is retried as well as 404: a PATCH for a record that doesn't exist yet
 # may come back as either.
@@ -74,11 +78,13 @@ class CognigyAnalyticsClient:
         self,
         api_base_url: str,
         api_key: str,
+        initial_delay: float = INITIAL_DELAY_SECONDS,
         retry_delays: Sequence[float] = RETRY_DELAYS_SECONDS,
         transport: Optional[httpx.AsyncBaseTransport] = None,
     ):
         self.url = api_base_url.rstrip("/") + "/v2.0/analytics"
         self.api_key = api_key
+        self.initial_delay = initial_delay
         self.retry_delays = retry_delays
         self._transport = transport
 
@@ -98,7 +104,7 @@ class CognigyAnalyticsClient:
         error: Optional[str] = None
         attempts = 0
         async with httpx.AsyncClient(timeout=15, transport=self._transport) as client:
-            for delay in (0, *self.retry_delays):
+            for delay in (self.initial_delay, *self.retry_delays):
                 if delay:
                     await asyncio.sleep(delay)
                 attempts += 1

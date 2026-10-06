@@ -81,7 +81,11 @@ async def _evaluate_and_write_back(request_model: EvaluateRequest, deps: Evaluat
         _result_log.write(error_result_log_record(eval_id, request_model.model_dump(), "internal_error", str(e)))
         properties = custom_fields_for_error(request_model.run_id, "internal_error")
 
-    client = CognigyAnalyticsClient(settings.cognigy_api_base_url, settings.cognigy_api_key)
+    client = CognigyAnalyticsClient(
+        settings.cognigy_api_base_url,
+        settings.cognigy_api_key,
+        initial_delay=settings.cognigy_writeback_delay_seconds,
+    )
     outcome = await client.patch_record(request_model, properties)
     _result_log.write(
         {

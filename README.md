@@ -98,9 +98,11 @@ the request above.
 
 The service then scores in the background and writes `custom1`–`custom10`
 onto that turn's Cognigy analytics record with `PATCH /v2.0/analytics`
-(`app/cognigy_analytics.py`). `contact_id` is the plain Cognigy userId;
-the service MD5-hashes it, because that's how Cognigy stores `contactId` on
-analytics records. The PATCH merges, so other fields on the
+(`app/cognigy_analytics.py`). `contact_id` is the plain Cognigy userId.
+Cognigy stores `contactId` on analytics records differently per channel
+(plain userId for the Interaction Panel, MD5 of the userId for REST), so the
+service sends the PATCH with both forms; only the matching one changes the
+record. The PATCH merges, so other fields on the
 record are untouched. The first PATCH waits 30s
 (`COGNIGY_WRITEBACK_DELAY_SECONDS`): writes sent sooner after the turn were
 accepted by Cognigy but never appeared on the record, apparently because the
@@ -141,7 +143,7 @@ or `504` (judge LLM timed out).
 | `app/evaluate.py` | Orchestrates the above into one pipeline |
 | `data/` | Bundled copy of the golden set + its embedding cache, for deployment |
 | `scripts/precompute_golden_set_embeddings.py` | Rebuilds `data/golden_set.embeddings.json` after the golden set changes |
-| `tests/` | 41 unit tests — everything except live Ragas metric scoring is tested with fakes (no OpenAI key needed) |
+| `tests/` | 42 unit tests — everything except live Ragas metric scoring is tested with fakes (no OpenAI key needed) |
 
 ## Running it locally
 

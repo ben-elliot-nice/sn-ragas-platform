@@ -17,6 +17,13 @@ from dotenv import load_dotenv
 # its dashboard, so this is a no-op in production (no .env file is deployed).
 load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
+# Ragas usage telemetry is on by default and POSTs to its tracking server
+# synchronously on every prompt/embedding call, blocking the event loop
+# (~6.5s blocked per eval, measured 6 Oct 2026). That stalled /health and new
+# /evaluate requests while a background eval ran, and roughly doubled eval
+# time. Off unless explicitly set otherwise.
+os.environ.setdefault("RAGAS_DO_NOT_TRACK", "true")
+
 DEFAULT_THRESHOLDS = {
     "faithfulness": 0.80,
     "factual_correctness": 0.70,

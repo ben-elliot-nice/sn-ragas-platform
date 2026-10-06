@@ -43,8 +43,10 @@ class EvaluationDeps:
     metric_timeout: Optional[float] = None
 
 
-async def evaluate(request: EvaluateRequest, deps: EvaluationDeps) -> EvaluateResponse:
-    eval_id = str(uuid.uuid4())
+async def evaluate(
+    request: EvaluateRequest, deps: EvaluationDeps, eval_id: Optional[str] = None
+) -> EvaluateResponse:
+    eval_id = eval_id or str(uuid.uuid4())
     timings: Dict[str, float] = {}
     t0 = time.monotonic()
 

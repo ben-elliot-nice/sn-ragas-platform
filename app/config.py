@@ -51,6 +51,12 @@ class Settings:
         self.match_confidence_floor = float(os.environ.get("MATCH_CONFIDENCE_FLOOR", "0.7"))
         self.log_destination = os.environ.get("LOG_DESTINATION", "local:./eval_log.jsonl")
 
+        # Async mode write-back (PATCH /v2.0/analytics). Base URL is the
+        # Cognigy REST API root up to (not including) /v2.0, e.g.
+        # https://api-trial.cognigy.ai/new
+        self.cognigy_api_base_url = os.environ.get("COGNIGY_API_BASE_URL", "")
+        self.cognigy_api_key = os.environ.get("COGNIGY_API_KEY", "")
+
         raw_thresholds = os.environ.get("THRESHOLDS", "").strip()
         overrides = json.loads(raw_thresholds) if raw_thresholds else {}
         self.thresholds = {**DEFAULT_THRESHOLDS, **overrides}

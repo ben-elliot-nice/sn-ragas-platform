@@ -76,6 +76,39 @@ the spec's table literally).
 }
 ```
 
+### Async mode (`writeback: true`) — used by Cognigy
+
+Cognigy's HTTP service gives up after a hard **15s**, and a full evaluation
+regularly takes 10–25s. So Cognigy calls in async mode: add three fields to
+the request above.
+
+```jsonc
+{
+  // ...same fields as above, plus:
+  "writeback": true,
+  "contact_id": "{{ci.userId}}",
+  "project_id": "6ab9d449a3709e53b89767da"
+}
+```
+
+```jsonc
+// 202 Accepted, returned in ~0.1s
+{ "eval_id": "uuid", "status": "accepted" }
+```
+
+The service then scores in the background and writes `custom1`–`custom10`
+onto that turn's Cognigy analytics record with `PATCH /v2.0/analytics`
+(`app/cognigy_analytics.py`). The PATCH merges, so other fields on the
+record are untouched. It retries on 400/404/5xx/network errors (2s, 5s, 10s,
+20s) in case the record hasn't been written yet. If the eval itself fails,
+it still PATCHes `custom9 = A:error|R:error|V:error` and
+`custom10 = <run_id>|error-<code>`. Every write-back attempt is logged as a
+`"type": "writeback"` line in the result log, with the final status.
+
+Needs `COGNIGY_API_BASE_URL` and `COGNIGY_API_KEY` set; without them a
+`writeback: true` call returns `500` `config`. Without `writeback` the
+service behaves exactly as before (sync, `200`).
+
 Full contract: `../cognigy-ragas-faq-evaluation.md` section 6.2.
 Errors come back as `{ "error": "code", "message": "...", "eval_id": "uuid" }`
 with status `400` (bad payload), `401` (bad `X-API-Key`), `500` (internal),
@@ -94,10 +127,11 @@ or `504` (judge LLM timed out).
 | `app/golden_set.py` | Loads the golden set + its precomputed question embeddings |
 | `app/llm_clients.py` | OpenAI chat + embedding clients, wrapped for Ragas |
 | `app/result_log.py` | Appends one JSON record per evaluation |
+| `app/cognigy_analytics.py` | Async mode: PATCHes results onto the Cognigy analytics record |
 | `app/evaluate.py` | Orchestrates the above into one pipeline |
 | `data/` | Bundled copy of the golden set + its embedding cache, for deployment |
 | `scripts/precompute_golden_set_embeddings.py` | Rebuilds `data/golden_set.embeddings.json` after the golden set changes |
-| `tests/` | 32 unit tests — everything except live Ragas metric scoring is tested with fakes (no OpenAI key needed) |
+| `tests/` | 39 unit tests — everything except live Ragas metric scoring is tested with fakes (no OpenAI key needed) |
 
 ## Running it locally
 
@@ -125,7 +159,8 @@ python3 -m pytest -q
 ## Deployment
 
 Hosted on Railway as a plain Python process (`Procfile` / `railway.json`).
-Set `OPENAI_API_KEY` and `API_KEY` in Railway's dashboard — nothing secret
+Set `OPENAI_API_KEY`, `API_KEY`, `COGNIGY_API_BASE_URL` and
+`COGNIGY_API_KEY` in the host's dashboard — nothing secret
 ships in the code. The golden set and its embeddings are bundled under
 `data/`, so no external file or database is needed at runtime. If the
 golden set changes, re-run `scripts/precompute_golden_set_embeddings.py`
@@ -133,9 +168,9 @@ and redeploy with the refreshed `data/golden_set.embeddings.json`.
 
 ## What this doesn't do
 
-- Doesn't talk to Cognigy directly — Cognigy's flow calls this service's
-  `POST /evaluate` over plain HTTP; wiring that up is a separate build
-  (spec section 5).
+- Only talks to Cognigy in async mode, and only to PATCH the analytics
+  record for the turn it was given. Cognigy's flow calls this service's
+  `POST /evaluate` over plain HTTP (spec section 5).
 - Doesn't store results anywhere queryable yet — the result log is a flat
   JSON Lines file (`LOG_DESTINATION`); Azure Table Storage was the original
   proposal but isn't implemented (`app/result_log.py` raises clearly if
